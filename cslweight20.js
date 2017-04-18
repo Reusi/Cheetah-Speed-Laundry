@@ -1,15 +1,17 @@
-var stripe = require('stripe');
+// Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+var stripe = require("stripe")("sk_test_ANNOfDQOVANuROwt9Um0VSS5");
 
-module.exports = function (ctx, req, res) {
-    stripe(ctx.secrets.sk_test_ANNOfDQOVANuROwt9Um0VSS5).charges.create({
-        amount: 3000,
-        currency: 'usd',
-        source: ctx.body.stripeToken,
-        description: 'Laundry Serrvice'
-    }, function (error, charge) {
-        var status = error ? 400 : 200;
-        var message = error ? error.message : 'Thanks for ordering!'; 
-        res.writeHead(status, { 'Content-Type': 'text/html' });
-        return res.end('<h1>' + message + '</h1>');
-    });
-};
+// Token is created using Stripe.js or Checkout!
+// Get the payment token submitted by the form:
+var token = request.body.stripeToken; // Using Express
+
+// Charge the user's card:
+var charge = stripe.charges.create({
+  amount: 3000,
+  currency: "usd",
+  description: "Example charge",
+  source: token,
+}, function(err, charge) {
+  // asynchronously called
+});
