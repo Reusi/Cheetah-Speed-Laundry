@@ -1,4 +1,4 @@
-var stripe = require("stripe")("sk_test_A6y8k03vHkuGhVs5wXEVjpjJ");
+var stripe = require("stripe")("pk_test_4B62TrpeQQcGPzXFrwlYsK9P");
 
 module.exports = function (ctx, req, res) {
     stripe(ctx.secrets.stripeSecretKey).charges.create({
